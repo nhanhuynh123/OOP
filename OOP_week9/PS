@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+class PS{
+    long tu, mau;
+    
+public:
+    PS(long t = 0, long m = 1){
+        Set(t, m);
+    }
+    PS(long t){
+        Set(t, 1);
+    }
+    void Set(long t, long m){ tu = t; mau = m;}
+    void Xuat() const {
+        cout << "\n" << tu << "/" << mau << endl;
+    }
+    
+};
+PS operator+ (PS a, PS b){
+    PS res;
+    res.Set(a.tu * b.mau + b.tu * a.mau, a.mau * b.mau);
+    return res;
+}
+PS operator+ (PS a, long b){
+    
+    PS re
+}
+int main(){
+    PS a;
+//    a.Xuat();
+    PS b(a);
+    b.Xuat();
+    return 0;
+}
