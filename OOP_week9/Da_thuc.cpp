@@ -7,9 +7,12 @@ class Dathuc{
     int *a;
 public:
     // Khởi tạo
-        Dathuc() {}
+        Dathuc() {
+        n = 0;
+        a[0] = 0;
+        }
         // Khởi tạo đa thức bậc n
-        Dathuc(const int n) : n(n), a(new int [n+1]) {
+        Dathuc(const int n, int heso[]) : n(n), a(new int [n+1]) {
             for (int i = 0; i <= n; i++) {
                 a[i] = 0;
             }
@@ -19,10 +22,10 @@ public:
             a[0] = x;
         }
 //    tinh gia tri da thuc
-    int calculus(int x){
-        int res = 0;
-        for(int i = 0; i <= n; i++) res += a[i] * pow(x, i);
-        return res;
+    int operator() (int x){
+    int res = 0;
+    for(int i = 0; i < n; i++) res += a[i] * pow(x, i);
+    return res;
     }
 // tra ve he so tai vi tri i
     int& operator[] (int i){
@@ -50,7 +53,11 @@ public:
     friend Dathuc operator+ (Dathuc A, Dathuc B){
         int max_n = max(A.n, B.n);
         Dathuc Res(max_n);
-        for(int i = 0; i <= max(A.n, B.n); i++) Res.a[i] = A.a[i] + B.a[i];
+        for(int i = 0; i <= min(A.n, B.n); i++) Res.a[i] = A.a[i] + B.a[i];
+        for(int i = min(A.n, B.n) + 1; i <= Res.n; i++){
+        if(A.n > B.n) Res.a[i] = A.a[i];
+        else Res.a[i] = B.a[i];
+        }
         return Res;
     }
 };
