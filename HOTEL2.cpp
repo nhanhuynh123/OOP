@@ -23,7 +23,7 @@ public:
     }
     float dThu(){
         TongdThu += pdv + ppv + 750 * So_dem;
-        return TongdThu;
+        return  pdv + ppv + 750 * So_dem;
     }
     static float Tong(){ return TongdThu;}
 };
@@ -76,20 +76,21 @@ public:
                     break;
             }
         }
-        for(int i = 1; i < x.iN; i++) x.arr[i]->dThu();
+        for(int i = 0; i < x.iN; i++) x.arr[i]->dThu();
         return is;
     }
     int find_max_dThu(){
-        if(Deluxe::Tong() > Business::Tong()){
-            if(Deluxe::Tong() > Premium::Tong()) return 1;
-            return 2;
+        if(Deluxe::Tong() > Premium::Tong()){
+            if(Deluxe::Tong() > Business::Tong()) return 1;
+            else return 3;
         }
         else{
-            if(Business::Tong() > Premium::Tong()) return 3;
-            return 2;
+            if(Premium::Tong() > Business::Tong()) return 2;
+            else return 3;
         }
     }
 };
+
 int main(){
     Hotel Sofitel;
     cin >> Sofitel;
